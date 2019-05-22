@@ -55,7 +55,7 @@ void ContinuousDetector::onInit ()
       new image_transport::ImageTransport(nh));
 
   camera_image_subscriber_ =
-      it_->subscribeCamera("/camera/color/image_raw", 1,
+      it_->subscribeCamera("image_rect", 1,
                           &ContinuousDetector::imageCallback, this);
   tag_detections_publisher_ =
       nh.advertise<AprilTagDetectionArray>("tag_detections", 1);

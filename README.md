@@ -1,5 +1,7 @@
 # Apriltags2_VO for VINS
 
+![avatar](/support_image/apriltag.gif) 
+
 This is a specific verision of the apriltags2_ros( based on https://github.com/AprilRobotics/apriltag_ros ) in order to correct the accumulative error of VINS pose estimator. **However, it can also be used as visual odometry (VO) alone.** I summarize my contributions as follow:  
 
 1、a modified and tasted configuration file for the camera of Intel Realsense d435i.  
@@ -14,10 +16,11 @@ you can read my blog for more details:
 
 https://blog.csdn.net/qq_41839222/article/details/89606859
 
+https://blog.csdn.net/qq_41839222/article/details/90482421
+
 ![avatar](/support_image/01.png)  
 
 ![avatar](/support_image/02.png)  
-
 
 
 

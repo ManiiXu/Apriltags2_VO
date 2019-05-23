@@ -478,20 +478,16 @@ Eigen::Matrix4d TagDetector::getRelativeTransform(
   cv::Matx33d R;
   cv::Rodrigues(rvec, R);
   Eigen::Matrix3d wRo,tmpwRo;
-  tmpwRo << R(0,0), R(0,1), R(0,2), R(1,0), R(1,1), R(1,2), R(2,0), R(2,1), R(2,2);
-  //wRo << R(0,0), R(1,0), R(2,0), R(0,1), R(1,1), R(2,1), R(0,2), R(1,2), R(2,2);
-
+  tmpwRo << R(0,0), R(0,1), R(0,2), R(1,0), R(1,1), R(1,2), R(2,0), R(2,1), R(2,2);//R^c_w
 
   Eigen::Vector3d t;
-  t << tvec.at<double>(0), tvec.at<double>(1), tvec.at<double>(2);
-  t = - tmpwRo.transpose() * t;
+  t << tvec.at<double>(0), tvec.at<double>(1), tvec.at<double>(2);//t^c_w
+  t = - tmpwRo.transpose() * t;//t^w_b = -[R^c_w]^T * t^c_w
 
   Eigen::Matrix3d rr;
-  rr << 0,0,1,-1,0,0,0,-1,0;
-  tmpwRo = rr * tmpwRo;
-  wRo = tmpwRo.transpose();
-
-
+  rr << 0,0,1,-1,0,0,0,-1,0;//R^b_c
+  tmpwRo = rr * tmpwRo;//R^b_c * R^c_w
+  wRo = tmpwRo.transpose();//R^w_b = [R^c_w]^T * R^c_b = [R^b_c * R^c_w]^T
 
   Eigen::Matrix4d T; // homogeneous transformation matrix
   T.topLeftCorner(3, 3) = wRo;
